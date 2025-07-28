@@ -274,7 +274,7 @@ class Astra_Child_Product_Grid_Widget extends \Elementor\Widget_Base
       wp_reset_postdata();
     else:
       ?>
-<p><?php esc_html_e('Nenhum produto encontrado.', 'astra-child'); ?></p>
+<p><?php esc_html_e('Nenhum produto .', 'astra-child'); ?></p>
 <?php
     endif;
   }
