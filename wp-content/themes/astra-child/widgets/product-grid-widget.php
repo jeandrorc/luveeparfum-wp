@@ -203,7 +203,7 @@ class Astra_Child_Product_Grid_Widget extends \Elementor\Widget_Base
   private function get_product_categories()
   {
     $categories = get_terms([
-      'taxonomy' => 'product_category',
+      'taxonomy' => 'product_cat',
       'hide_empty' => false,
     ]);
 
@@ -250,16 +250,16 @@ class Astra_Child_Product_Grid_Widget extends \Elementor\Widget_Base
 
     if ($products_query->have_posts()):
       ?>
-      <div class="products-grid">
-        <?php while ($products_query->have_posts()):
+<div class="products-grid">
+  <?php while ($products_query->have_posts()):
           $products_query->the_post(); ?>
-          <?php echo astra_child_product_card(); ?>
-        <?php endwhile; ?>
-      </div>
+  <?php echo astra_child_product_card(); ?>
+  <?php endwhile; ?>
+</div>
 
-      <?php if ($settings['show_pagination'] === 'yes'): ?>
-        <div class="products-pagination">
-          <?php
+<?php if ($settings['show_pagination'] === 'yes'): ?>
+<div class="products-pagination">
+  <?php
           echo paginate_links([
             'total' => $products_query->max_num_pages,
             'current' => max(1, get_query_var('paged')),
@@ -267,15 +267,15 @@ class Astra_Child_Product_Grid_Widget extends \Elementor\Widget_Base
             'next_text' => 'Próximo <i class="fas fa-chevron-right"></i>',
           ]);
           ?>
-        </div>
-      <?php endif; ?>
+</div>
+<?php endif; ?>
 
-      <?php
+<?php
       wp_reset_postdata();
     else:
       ?>
-      <p><?php esc_html_e('Nenhum produto encontrado.', 'astra-child'); ?></p>
-      <?php
+<p><?php esc_html_e('Nenhum produto encontrado.', 'astra-child'); ?></p>
+<?php
     endif;
   }
 }
