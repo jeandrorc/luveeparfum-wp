@@ -15,9 +15,10 @@ jobs:
         uses: easingthemes/ssh-deploy@v4
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: luveeparfum.com.br
+          REMOTE_USER: jeandr00
+          REMOTE_PORT: 2222
+          TARGET: /home/jeandr00/public_html
+          SOURCE: ./
           ARGS: "-rltgoDzvO --delete"
-          SOURCE: "./"
-          REMOTE_HOST: "luveeparfum.com.br"
-          REMOTE_USER: "jeandr00"
-          REMOTE_PORT: "2222"
-          TARGET: "/home/jeandr00/public_html"
+          RSYNC_RSH: "ssh -p 2222 -o StrictHostKeyChecking=no"
