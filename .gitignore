@@ -1,0 +1,60 @@
+# WordPress core
+/wp-admin/
+/wp-includes/
+
+# Configurações sensíveis
+wp-config.php
+wp-config-sample.php
+
+# Uploads e mídias
+wp-content/uploads/
+
+# Plugins de terceiros (ignorar todos por padrão, exceto próprios)
+wp-content/plugins/*
+!wp-content/plugins/.gitkeep
+!wp-content/plugins/astra-child/
+
+# Temas de terceiros (ignorar todos por padrão, exceto próprios)
+wp-content/themes/*
+!wp-content/themes/.gitkeep
+!wp-content/themes/astra-child/
+
+# Cache, backups e logs
+wp-content/cache/
+wp-content/backups/
+wp-content/upgrade/
+wp-content/ai1wm-backups/
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Dependências (Node, Composer)
+node_modules/
+bower_components/
+vendor/
+composer.lock
+
+# SASS cache
+.sass-cache/
+
+# Arquivos de IDEs
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Arquivos de ambiente
+.env
+.env.*
+
+# Arquivos de exportação do WordPress
+*.sql
+*.tar.gz
+*.zip
+*.gz
+*.rar

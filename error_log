@@ -1,0 +1,135 @@
+[03-Jul-2025 00:56:19 UTC] Exception caught in get_preset. Invalid preset.. Args: Array
+(
+    [0] => default-preset
+)
+..
+[03-Jul-2025 00:56:19 UTC] WordPress database error Table 'jeandr00_wp167.wp_yith_wcan_cache' doesn't exist for query DELETE FROM wp_yith_wcan_cache WHERE CHAR_LENGTH(`group`) > 100 made by require('wp-blog-header.php'), require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('init'), WP_Hook->do_action, WP_Hook->apply_filters, YITH_WCAN_Install::check_db_version, YITH_WCAN_Install::update_db, YITH_WCAN_Install::maybe_normalize_data, YITH_WCAN_Install::do_5110_db_upgrade
+[03-Jul-2025 00:56:29 UTC] PHP Warning:  foreach() argument must be of type array|object, false given in /home2/jeandr00/public_html/wp-content/plugins/extendify/app/Shared/Services/PluginDependencies/Forms/WPForms.php on line 88
+[05-Jul-2025 01:17:58 UTC] WordPress database error You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(ORDER BY date_created_gmt) AS order_rank,
+					date_created_gmt AS order_create' at line 3 for query SELECT
+					id,
+					row_number() OVER (ORDER BY date_created_gmt) AS order_rank,
+					date_created_gmt AS order_created_at,
+					date_updated_gmt AS order_updated_at,
+					currency,
+					total_amount,
+					payment_method,
+					payment_method_title
+				FROM wp_wc_orders
+				WHERE
+					type = 'shop_order'
+					AND status IN ('wc-completed', 'wc-refunded')
+				ORDER BY date_created_gmt ASC
+				LIMIT 20; made by do_action_ref_array('woocommerce_tracker_send_event'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Tracker::send_tracking_data, WC_Tracker::get_tracking_data, WC_Tracker::get_order_snapshot, WC_Tracker::get_order_data
+[05-Jul-2025 01:17:58 UTC] WordPress database error You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(ORDER BY date_created_gmt) AS order_rank,
+					date_created_gmt AS order_create' at line 3 for query SELECT
+					id,
+					row_number() OVER (ORDER BY date_created_gmt) AS order_rank,
+					date_created_gmt AS order_created_at,
+					date_updated_gmt AS order_updated_at,
+					currency,
+					total_amount,
+					payment_method,
+					payment_method_title
+				FROM wp_wc_orders
+				WHERE
+					type = 'shop_order'
+					AND status IN ('wc-completed', 'wc-refunded')
+				ORDER BY date_created_gmt DESC
+				LIMIT 20; made by do_action_ref_array('woocommerce_tracker_send_event'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Tracker::send_tracking_data, WC_Tracker::get_tracking_data, WC_Tracker::get_order_snapshot, WC_Tracker::get_order_data
+[12-Jul-2025 01:23:21 UTC] WordPress database error You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(ORDER BY date_created_gmt) AS order_rank,
+					date_created_gmt AS order_create' at line 3 for query SELECT
+					id,
+					row_number() OVER (ORDER BY date_created_gmt) AS order_rank,
+					date_created_gmt AS order_created_at,
+					date_updated_gmt AS order_updated_at,
+					currency,
+					total_amount,
+					payment_method,
+					payment_method_title
+				FROM wp_wc_orders
+				WHERE
+					type = 'shop_order'
+					AND status IN ('wc-completed', 'wc-refunded')
+				ORDER BY date_created_gmt ASC
+				LIMIT 20; made by do_action_ref_array('woocommerce_tracker_send_event'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Tracker::send_tracking_data, WC_Tracker::get_tracking_data, WC_Tracker::get_order_snapshot, WC_Tracker::get_order_data
+[12-Jul-2025 01:23:21 UTC] WordPress database error You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(ORDER BY date_created_gmt) AS order_rank,
+					date_created_gmt AS order_create' at line 3 for query SELECT
+					id,
+					row_number() OVER (ORDER BY date_created_gmt) AS order_rank,
+					date_created_gmt AS order_created_at,
+					date_updated_gmt AS order_updated_at,
+					currency,
+					total_amount,
+					payment_method,
+					payment_method_title
+				FROM wp_wc_orders
+				WHERE
+					type = 'shop_order'
+					AND status IN ('wc-completed', 'wc-refunded')
+				ORDER BY date_created_gmt DESC
+				LIMIT 20; made by do_action_ref_array('woocommerce_tracker_send_event'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Tracker::send_tracking_data, WC_Tracker::get_tracking_data, WC_Tracker::get_order_snapshot, WC_Tracker::get_order_data
+[19-Jul-2025 03:17:57 UTC] WordPress database error You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(ORDER BY date_created_gmt) AS order_rank,
+					date_created_gmt AS order_create' at line 3 for query SELECT
+					id,
+					row_number() OVER (ORDER BY date_created_gmt) AS order_rank,
+					date_created_gmt AS order_created_at,
+					date_updated_gmt AS order_updated_at,
+					currency,
+					total_amount,
+					payment_method,
+					payment_method_title
+				FROM wp_wc_orders
+				WHERE
+					type = 'shop_order'
+					AND status IN ('wc-completed', 'wc-refunded')
+				ORDER BY date_created_gmt ASC
+				LIMIT 20; made by do_action_ref_array('woocommerce_tracker_send_event'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Tracker::send_tracking_data, WC_Tracker::get_tracking_data, WC_Tracker::get_order_snapshot, WC_Tracker::get_order_data
+[19-Jul-2025 03:17:57 UTC] WordPress database error You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(ORDER BY date_created_gmt) AS order_rank,
+					date_created_gmt AS order_create' at line 3 for query SELECT
+					id,
+					row_number() OVER (ORDER BY date_created_gmt) AS order_rank,
+					date_created_gmt AS order_created_at,
+					date_updated_gmt AS order_updated_at,
+					currency,
+					total_amount,
+					payment_method,
+					payment_method_title
+				FROM wp_wc_orders
+				WHERE
+					type = 'shop_order'
+					AND status IN ('wc-completed', 'wc-refunded')
+				ORDER BY date_created_gmt DESC
+				LIMIT 20; made by do_action_ref_array('woocommerce_tracker_send_event'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Tracker::send_tracking_data, WC_Tracker::get_tracking_data, WC_Tracker::get_order_snapshot, WC_Tracker::get_order_data
+[26-Jul-2025 20:19:24 UTC] WordPress database error You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(ORDER BY date_created_gmt) AS order_rank,
+					date_created_gmt AS order_create' at line 3 for query SELECT
+					id,
+					row_number() OVER (ORDER BY date_created_gmt) AS order_rank,
+					date_created_gmt AS order_created_at,
+					date_updated_gmt AS order_updated_at,
+					currency,
+					total_amount,
+					payment_method,
+					payment_method_title
+				FROM wp_wc_orders
+				WHERE
+					type = 'shop_order'
+					AND status IN ('wc-completed', 'wc-refunded')
+				ORDER BY date_created_gmt ASC
+				LIMIT 20; made by do_action_ref_array('woocommerce_tracker_send_event'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Tracker::send_tracking_data, WC_Tracker::get_tracking_data, WC_Tracker::get_order_snapshot, WC_Tracker::get_order_data
+[26-Jul-2025 20:19:24 UTC] WordPress database error You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(ORDER BY date_created_gmt) AS order_rank,
+					date_created_gmt AS order_create' at line 3 for query SELECT
+					id,
+					row_number() OVER (ORDER BY date_created_gmt) AS order_rank,
+					date_created_gmt AS order_created_at,
+					date_updated_gmt AS order_updated_at,
+					currency,
+					total_amount,
+					payment_method,
+					payment_method_title
+				FROM wp_wc_orders
+				WHERE
+					type = 'shop_order'
+					AND status IN ('wc-completed', 'wc-refunded')
+				ORDER BY date_created_gmt DESC
+				LIMIT 20; made by do_action_ref_array('woocommerce_tracker_send_event'), WP_Hook->do_action, WP_Hook->apply_filters, WC_Tracker::send_tracking_data, WC_Tracker::get_tracking_data, WC_Tracker::get_order_snapshot, WC_Tracker::get_order_data
