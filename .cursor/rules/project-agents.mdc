@@ -1,0 +1,13 @@
+---
+description: Give rules to do best project
+globs:
+alwaysApply: false
+---
+
+## Agents
+- Allways use file if existents in .claude/agents
+- Decidir qual agente usar, conforme o tipo da tarefa
+- Se o usuario informar qual agente usar, o prompt é a preferencia
+- Antes de tomar qualquer ação pense pelo tempo que precisar, tenha certeza de cada linha codigo criada
+- tente testar cada alteracao antes de realizar, seja minimalista e pixel perfect.
+- sempre se lembro **mobile first** experiencia mobile deve ser muito fluida

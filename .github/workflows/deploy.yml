@@ -11,14 +11,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Deploy via SSH
+      - name: Decode SSH Key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY_B64 }}" | base64 -d > private_key
+          chmod 600 private_key
+          mkdir -p ~/.ssh
+          cp private_key ~/.ssh/id_ed25519
+          echo "Host *" > ~/.ssh/config
+          echo "    StrictHostKeyChecking no" >> ~/.ssh/config
+
+      - name: Deploy with Rsync
         uses: easingthemes/ssh-deploy@v4
         with:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PRIVATE_KEY: ""
           REMOTE_HOST: luveeparfum.com.br
           REMOTE_USER: jeandr00
           REMOTE_PORT: 2222
           TARGET: /home/jeandr00/public_html
           SOURCE: ./
           ARGS: "-rltgoDzvO --delete"
-          RSYNC_RSH: "ssh -p 2222 -o StrictHostKeyChecking=no"
+          RSYNC_RSH: "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no -p 2222"

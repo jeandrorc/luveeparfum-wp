@@ -1,9 +1,30 @@
 version: "3.8"
 
 services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-local-luvee
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
+      MYSQL_USER: ${WORDPRESS_DB_USER}
+      MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      MYSQL_CHARACTER_SET_SERVER: ${MYSQL_CHARSET:-utf8mb4}
+      MYSQL_COLLATION_SERVER: ${MYSQL_COLLATION:-utf8mb4_unicode_ci}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database-backups:/backups
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+
   wordpress:
     image: wordpress:latest
     container_name: wordpress-local-luvee
+    restart: unless-stopped
+    depends_on:
+      - mysql
     volumes:
       - ./:/var/www/html
     ports:
@@ -23,6 +44,7 @@ services:
     image: wordpress:cli
     container_name: wpcli-luvee
     depends_on:
+      - mysql
       - wordpress
     volumes:
       - ./:/var/www/html
@@ -34,3 +56,6 @@ services:
       PHP_MEMORY_LIMIT: 1024M
       PHP_MAX_EXECUTION_TIME: 300
     entrypoint: wp
+
+volumes:
+  mysql_data:

@@ -1,0 +1,17 @@
+# =============================================================================
+# CONFIGURAÇÕES DE SINCRONIZAÇÃO - EXEMPLO
+# Copie este arquivo para .env.sync e ajuste suas configurações
+# =============================================================================
+
+# Configurações do servidor remoto
+REMOTE_HOST=luvee.com.br
+REMOTE_USER=ubuntu
+REMOTE_PATH=/var/www/html
+REMOTE_URL=https://luvee.com.br
+
+# Configurações locais
+LOCAL_URL=http://localhost:8000
+BACKUP_DIR=./database-backups
+
+# Opções adicionais
+SKIP_SEARCH_REPLACE=false
