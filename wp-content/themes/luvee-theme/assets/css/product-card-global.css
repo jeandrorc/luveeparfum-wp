@@ -1,0 +1,445 @@
+/**
+ * Product Card Global Styles
+ * Estilos globais para content-product.php - disponível em todas as páginas
+ */
+
+/* ========== PRODUCT CARD BASE ========== */
+
+/* Product actions container */
+.product-actions {
+  margin-top: auto;
+}
+
+/* Product card modern styling */
+.product-card-modern {
+  transition: all 0.3s ease;
+  border: none;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.product-card-modern:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Product image container */
+.product-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+}
+
+.product-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-card-modern:hover .product-image img {
+  transform: scale(1.05);
+}
+
+/* Badges positioning */
+.product-badges {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+}
+
+.product-badges .badge {
+  margin-right: 5px;
+  margin-bottom: 5px;
+  font-size: 0.7rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 15px;
+}
+
+.badge-sale {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  color: white;
+}
+
+.badge-new {
+  background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+  color: white;
+}
+
+.badge-featured {
+  background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+  color: #212529;
+}
+
+/* Wishlist button */
+.wishlist-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 3;
+}
+
+.wishlist-btn:hover {
+  background: #fff;
+  transform: scale(1.1);
+}
+
+.wishlist-btn.active {
+  background: #dc3545;
+  color: white;
+}
+
+/* ========== ADD TO CART BUTTON ========== */
+
+/* Botão Adicionar ao Carrinho */
+.btn-add-to-cart {
+  background: linear-gradient(135deg, #ff6b9d 0%, #ff8cc8 100%);
+  border: none;
+  color: white;
+  border-radius: 25px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+  min-width: 180px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-add-to-cart:hover {
+  background: linear-gradient(135deg, #ff5a8a 0%, #ff7bb8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+  color: white;
+}
+
+.btn-add-to-cart:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-add-to-cart i {
+  font-size: 0.8rem;
+}
+
+/* Estados do botão add to cart */
+.btn-add-to-cart.btn-success {
+  background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+  border: none;
+  color: white;
+}
+
+.btn-add-to-cart.btn-danger {
+  background: linear-gradient(135deg, #dc3545 0%, #bd2130 100%);
+  border: none;
+  color: white;
+}
+
+/* Animação de loading no botão */
+.btn-add-to-cart .fa-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-add-to-cart:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 123, 255, 0.2);
+}
+
+.btn-add-to-cart:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Button states */
+.btn-add-to-cart.loading {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.btn-add-to-cart.loading .btn-text,
+.btn-add-to-cart.loading .btn-success-text {
+  display: none !important;
+}
+
+.btn-add-to-cart.loading .btn-loading {
+  display: inline-block !important;
+}
+
+.btn-add-to-cart.success {
+  background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+  border-color: #28a745;
+  color: white;
+}
+
+.btn-add-to-cart.success .btn-text,
+.btn-add-to-cart.success .btn-loading {
+  display: none !important;
+}
+
+.btn-add-to-cart.success .btn-success-text {
+  display: inline-block !important;
+}
+
+/* Error state */
+.btn-add-to-cart.error {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  border-color: #dc3545;
+  color: white;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  75% {
+    transform: translateX(2px);
+  }
+}
+
+/* Out of stock button */
+.btn-outline-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Success animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.btn-add-to-cart.success {
+  animation: pulse 0.6s ease-in-out;
+}
+
+/* ========== PRODUCT CONTENT ========== */
+
+/* Product title */
+.product-title {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+  color: #212529;
+}
+
+.product-title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.product-title a:hover {
+  color: #007bff;
+}
+
+/* Product excerpt */
+.product-excerpt {
+  font-size: 0.85rem;
+  color: #6c757d;
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+}
+
+/* Rating stars */
+.product-rating {
+  margin-bottom: 0.5rem;
+}
+
+.rating-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.rating-count {
+  font-size: 0.75rem;
+  color: #6c757d;
+  margin-left: 0.5rem;
+}
+
+/* Product price */
+.product-price {
+  margin-top: auto;
+  margin-bottom: 1rem;
+}
+
+.price-display {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.current-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #28a745;
+}
+
+.original-price {
+  font-size: 0.9rem;
+  color: #6c757d;
+  text-decoration: line-through;
+}
+
+/* Sale price special styling */
+.product-card-modern .current-price {
+  color: #dc3545;
+}
+
+.product-card-modern:not(.on-sale) .current-price {
+  color: #212529;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+/* Mobile adjustments */
+@media (max-width: 575.98px) {
+  .btn-add-to-cart {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .btn-add-to-cart i {
+    font-size: 0.7rem;
+  }
+
+  .product-image img {
+    height: 180px;
+  }
+
+  .product-title {
+    font-size: 0.9rem;
+  }
+
+  .current-price {
+    font-size: 1rem !important;
+  }
+
+  .product-badges .badge {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .wishlist-btn {
+    width: 30px;
+    height: 30px;
+    top: 8px;
+    right: 8px;
+  }
+}
+
+/* Tablet adjustments */
+@media (max-width: 767.98px) {
+  .product-image img {
+    height: 190px;
+  }
+}
+
+/* ========== FLEXBOX COMPATIBILITY ========== */
+
+/* For flexbox grids */
+.products-grid-flexbox .product-grid-item .product-card-modern {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.products-grid-flexbox .product-grid-item .card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.products-grid-flexbox .product-grid-item .product-actions {
+  margin-top: auto;
+}
+
+/* For carousel */
+.carousel-product-item .product-card-modern {
+  margin-bottom: 0;
+  height: 100%;
+}
+
+/* ========== HOVER EFFECTS ========== */
+
+.product-grid-item:hover {
+  transform: translateY(-2px);
+  transition: transform 0.3s ease;
+}
+
+/* Loading states */
+.product-card-modern.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ========== ACCESSIBILITY ========== */
+
+.btn-add-to-cart:focus,
+.wishlist-btn:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .product-card-modern {
+    border: 2px solid #212529;
+  }
+
+  .btn-add-to-cart {
+    border: 2px solid #007bff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .product-card-modern,
+  .btn-add-to-cart,
+  .product-image img {
+    transition: none;
+  }
+
+  .btn-add-to-cart.success {
+    animation: none;
+  }
+
+  .btn-add-to-cart.error {
+    animation: none;
+  }
+}

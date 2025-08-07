@@ -1,0 +1,333 @@
+/* Estilos administrativos do plugin Luvee Site */
+
+/* Status dos banners */
+.banner-status {
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.banner-status.status-active {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.banner-status.status-inactive {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.banner-status.status-scheduled {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.banner-status.status-expired {
+  background-color: #e2e3e5;
+  color: #6c757d;
+  border: 1px solid #d6d8db;
+}
+
+/* Meta boxes dos carrosséis */
+.carousel-item-wrapper {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.carousel-item-wrapper h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #ddd;
+  color: #23282d;
+}
+
+.carousel-item-wrapper .form-table {
+  margin-bottom: 10px;
+}
+
+.carousel-item-wrapper .form-table th {
+  width: 150px;
+  padding: 8px 10px 8px 0;
+}
+
+.carousel-item-wrapper .form-table td {
+  padding: 8px 0;
+}
+
+.remove-carousel-item {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
+}
+
+.remove-carousel-item:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+  color: white;
+}
+
+#add-carousel-item {
+  margin-top: 10px;
+  background-color: #007cba;
+  border-color: #007cba;
+  color: white;
+}
+
+#add-carousel-item:hover {
+  background-color: #005a87;
+  border-color: #005a87;
+  color: white;
+}
+
+/* Imagem preview */
+.image-preview {
+  margin-top: 10px;
+}
+
+.image-preview img {
+  max-width: 200px;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.select-image {
+  margin-left: 10px;
+}
+
+/* Colunas personalizadas */
+.column-banner_image,
+.column-hero_image {
+  width: 80px;
+}
+
+.column-banner_position,
+.column-banner_status,
+.column-hero_status {
+  width: 100px;
+}
+
+.column-banner_stats,
+.column-carousel_stats,
+.column-hero_stats {
+  width: 120px;
+}
+
+.column-carousel_items {
+  width: 80px;
+}
+
+.column-carousel_settings {
+  width: 150px;
+}
+
+/* Filtros */
+.tablenav .actions select {
+  margin-right: 5px;
+}
+
+/* Mensagens de erro/sucesso */
+.luvee-notice {
+  background: #fff;
+  border-left: 4px solid #0073aa;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  padding: 12px;
+}
+
+.luvee-notice.error {
+  border-left-color: #dc3232;
+}
+
+.luvee-notice.success {
+  border-left-color: #46b450;
+}
+
+.luvee-notice.warning {
+  border-left-color: #ffb900;
+}
+
+/* Meta box específico para configurações */
+.luvee-meta-section {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.luvee-meta-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.luvee-meta-section h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #23282d;
+}
+
+/* Campos de formulário */
+.luvee-field-group {
+  margin-bottom: 15px;
+}
+
+.luvee-field-group label {
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.luvee-field-group input[type="text"],
+.luvee-field-group input[type="url"],
+.luvee-field-group input[type="number"],
+.luvee-field-group select,
+.luvee-field-group textarea {
+  width: 100%;
+  max-width: 400px;
+}
+
+.luvee-field-group .description {
+  margin-top: 5px;
+  font-style: italic;
+  color: #666;
+  font-size: 13px;
+}
+
+/* Checkbox especiais */
+.luvee-checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.luvee-checkbox-group input[type="checkbox"] {
+  margin: 0;
+}
+
+/* Loading spinner */
+.luvee-loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: #0073aa;
+  animation: luvee-spin 1s ease-in-out infinite;
+}
+
+@keyframes luvee-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsividade */
+@media (max-width: 782px) {
+  .carousel-item-wrapper .form-table th {
+    width: auto;
+    display: block;
+    padding: 8px 0 5px 0;
+  }
+
+  .carousel-item-wrapper .form-table td {
+    display: block;
+    padding: 0 0 15px 0;
+  }
+
+  .luvee-field-group input[type="text"],
+  .luvee-field-group input[type="url"],
+  .luvee-field-group input[type="number"],
+  .luvee-field-group select,
+  .luvee-field-group textarea {
+    max-width: 100%;
+  }
+}
+
+/* ========== FEATURED PRODUCTS ADMIN STYLES ========== */
+
+/* Coluna featured na listagem */
+.column-luvee_featured {
+  width: 80px;
+  text-align: center;
+}
+
+.column-luvee_featured span {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-block;
+  padding: 4px;
+  border-radius: 3px;
+}
+
+.column-luvee_featured span:hover {
+  transform: scale(1.3);
+  background: rgba(231, 180, 22, 0.1);
+}
+
+/* Meta box no edit product */
+#luvee_featured_product .inside {
+  padding: 15px;
+}
+
+#luvee_featured_product label {
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+#luvee_featured_product input[type="checkbox"] {
+  transform: scale(1.2);
+  margin-right: 8px;
+}
+
+/* Stats widget */
+#luvee-featured-stats {
+  animation: fadeIn 0.5s ease;
+}
+
+#luvee-featured-stats h4 {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+/* Badge preview no meta box */
+.luvee-badge-preview {
+  display: inline-block;
+  background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+  color: #212529;
+  padding: 4px 8px;
+  border-radius: 15px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+/* Frontend badge styles */
+.luvee-featured-badge-single {
+  margin-bottom: 15px;
+}
+
+.luvee-featured-price-badge {
+  font-size: 0.8em;
+  margin-left: 5px;
+  color: #e7b416;
+}
+
+.badge-featured {
+  background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+  color: #212529;
+  padding: 4px 8px;
+  border-radius: 15px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0.5px;
+}

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste - Sistema de Carrinho Luvee</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="assets/css/mini-cart.css" rel="stylesheet">
+    <style>
+        body { padding: 2rem 0; }
+        .test-card { margin-bottom: 2rem; }
+        .test-button { margin: 0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">🛒 Teste do Sistema de Carrinho AJAX</h1>
+        
+        <!-- Simulação do Header -->
+        <div class="card test-card">
+            <div class="card-header">
+                <h5>Header - Botão do Carrinho</h5>
+            </div>
+            <div class="card-body">
+                <button type="button" class="btn btn-primary position-relative mini-cart-toggle">
+                    <i class="fas fa-shopping-bag me-2"></i>Carrinho
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark cart-count" style="display: none;">
+                        0
+                        <span class="visually-hidden">itens no carrinho</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Simulação de Produtos -->
+        <div class="card test-card">
+            <div class="card-header">
+                <h5>Produtos - Botões Add to Cart</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>Perfume Teste 1</h6>
+                                <p class="text-muted">R$ 89,90</p>
+                                <button class="btn btn-add-to-cart w-100" data-product-id="123">
+                                    <i class="fas fa-shopping-cart me-2"></i>
+                                    Adicionar ao Carrinho
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>Perfume Teste 2</h6>
+                                <p class="text-muted">R$ 129,90</p>
+                                <button class="btn btn-add-to-cart w-100" data-product-id="124">
+                                    <i class="fas fa-shopping-cart me-2"></i>
+                                    Adicionar ao Carrinho
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>Perfume Teste 3</h6>
+                                <p class="text-muted">R$ 159,90</p>
+                                <button class="btn btn-add-to-cart w-100" data-product-id="125">
+                                    <i class="fas fa-shopping-cart me-2"></i>
+                                    Adicionar ao Carrinho
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testes de Funcionalidade -->
+        <div class="card test-card">
+            <div class="card-header">
+                <h5>Testes de Funcionalidade</h5>
+            </div>
+            <div class="card-body">
+                <button class="btn btn-primary test-button" onclick="testShowMiniCart()">
+                    Mostrar Mini-Cart
+                </button>
+                <button class="btn btn-secondary test-button" onclick="testUpdateCartCount(5)">
+                    Simular 5 Itens
+                </button>
+                <button class="btn btn-warning test-button" onclick="testShowNotification('Teste de notificação!', 'success')">
+                    Notificação Sucesso
+                </button>
+                <button class="btn btn-danger test-button" onclick="testShowNotification('Erro de teste!', 'error')">
+                    Notificação Erro
+                </button>
+                <button class="btn btn-info test-button" onclick="testMiniCartContent()">
+                    Conteúdo Mock
+                </button>
+            </div>
+        </div>
+
+        <!-- Status dos Scripts -->
+        <div class="card test-card">
+            <div class="card-header">
+                <h5>Status dos Scripts</h5>
+            </div>
+            <div class="card-body">
+                <div id="script-status">
+                    <p class="text-muted">Verificando scripts...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Mock do sistema de carrinho para teste -->
+    <script>
+        // Mock para testes sem WordPress
+        window.luvee_cart_ajax = {
+            ajax_url: '#',
+            nonce: 'test-nonce',
+            cart_url: '#',
+            checkout_url: '#'
+        };
+
+        // Funções de teste
+        function testShowMiniCart() {
+            if (typeof window.LuveeCart !== 'undefined') {
+                window.LuveeCart.showMiniCart();
+            } else {
+                alert('LuveeCart não carregado');
+            }
+        }
+
+        function testUpdateCartCount(count) {
+            $('.cart-count').text(count).show();
+            $('.cart-count').addClass('updated');
+            setTimeout(() => $('.cart-count').removeClass('updated'), 500);
+        }
+
+        function testShowNotification(message, type) {
+            if (typeof window.LuveeCart !== 'undefined') {
+                window.LuveeCart.showNotification(message, type);
+            } else {
+                alert(message);
+            }
+        }
+
+        function testMiniCartContent() {
+            const mockContent = `
+                <div class="mini-cart-item">
+                    <div class="mini-cart-item-image">
+                        <img src="https://via.placeholder.com/60x60/ff6b9d/ffffff?text=P1" alt="Produto">
+                    </div>
+                    <div class="mini-cart-item-info">
+                        <h6 class="mini-cart-item-name">Perfume Teste Mock</h6>
+                        <div class="mini-cart-item-price">R$ 89,90</div>
+                        <div class="mini-cart-quantity-controls">
+                            <input type="number" class="mini-cart-quantity" value="1" min="1">
+                            <button type="button" class="mini-cart-remove" title="Remover">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            $('.mini-cart-content').html(mockContent);
+            $('.cart-total').text('R$ 89,90');
+            testUpdateCartCount(1);
+        }
+
+        // Verificar status dos scripts
+        $(document).ready(function() {
+            const status = $('#script-status');
+            status.html('');
+            
+            // jQuery
+            status.append('<p class="text-success"><i class="fas fa-check"></i> jQuery carregado</p>');
+            
+            // Bootstrap
+            if (typeof bootstrap !== 'undefined') {
+                status.append('<p class="text-success"><i class="fas fa-check"></i> Bootstrap carregado</p>');
+            } else {
+                status.append('<p class="text-danger"><i class="fas fa-times"></i> Bootstrap não carregado</p>');
+            }
+            
+            // LuveeCart
+            setTimeout(() => {
+                if (typeof window.LuveeCart !== 'undefined') {
+                    status.append('<p class="text-success"><i class="fas fa-check"></i> LuveeCart carregado</p>');
+                } else {
+                    status.append('<p class="text-warning"><i class="fas fa-exclamation-triangle"></i> LuveeCart não carregado (normal em teste standalone)</p>');
+                }
+            }, 1000);
+        });
+    </script>
+
+    <!-- Carregar sistema real se disponível -->
+    <script>
+        // Tentar carregar o sistema real se estivermos no WordPress
+        if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+            const cartScript = document.createElement('script');
+            cartScript.src = 'assets/js/cart-ajax.js';
+            document.head.appendChild(cartScript);
+        }
+    </script>
+</body>
+</html>
