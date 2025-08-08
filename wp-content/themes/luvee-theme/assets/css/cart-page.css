@@ -1,0 +1,670 @@
+/**
+ * Cart Page - Luvee Perfumaria
+ * Estilos modernos para a página de carrinho
+ */
+
+/* ========== CART PAGE BASE ========== */
+
+.luvee-cart-page {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  min-height: 100vh;
+}
+
+/* ========== CART HEADER ========== */
+
+.cart-header {
+  background: linear-gradient(
+    135deg,
+    var(--luvee-primary) 0%,
+    var(--luvee-secondary) 100%
+  );
+  color: white;
+  padding: 2rem 0;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 25px rgba(255, 107, 157, 0.3);
+}
+
+.cart-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.cart-title i {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem;
+  border-radius: 50%;
+}
+
+.cart-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* ========== EMPTY CART ========== */
+
+.cart-empty {
+  background: white;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+}
+
+.empty-cart-icon {
+  opacity: 0.3;
+}
+
+.cart-empty h3 {
+  color: var(--luvee-dark);
+  font-weight: 600;
+}
+
+/* ========== CART ITEMS ========== */
+
+.cart-items-section {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.cart-section-header {
+  border-bottom: 2px solid #f8f9fa;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  color: var(--luvee-dark);
+  font-weight: 600;
+}
+
+.section-title i {
+  color: var(--luvee-primary);
+}
+
+.items-count {
+  background: linear-gradient(
+    135deg,
+    var(--luvee-primary) 0%,
+    var(--luvee-secondary) 100%
+  );
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+}
+
+/* ========== CART ITEM CARDS ========== */
+
+.cart-item-card {
+  transition: all 0.3s ease;
+}
+
+.cart-item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.cart-item-card .card {
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.cart-item-card:hover .card {
+  border-color: var(--luvee-primary);
+}
+
+.product-image img {
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.cart-item-card:hover .product-image img {
+  transform: scale(1.05);
+}
+
+.product-name {
+  color: var(--luvee-dark);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.product-name a {
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.product-name a:hover {
+  color: var(--luvee-primary);
+}
+
+/* ========== QUANTITY CONTROLS ========== */
+
+.quantity-controls {
+  text-align: center;
+}
+
+.quantity-wrapper {
+  position: relative;
+}
+
+.quantity-wrapper input[type="number"] {
+  background: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  padding: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  max-width: 100px;
+}
+
+.quantity-wrapper input[type="number"]:focus {
+  background: white;
+  border-color: var(--luvee-primary);
+  box-shadow: 0 0 0 0.2rem rgba(255, 107, 157, 0.25);
+}
+
+/* ========== PRICE DISPLAY ========== */
+
+.price-display {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--luvee-primary);
+}
+
+.remove-item-btn {
+  transition: all 0.3s ease;
+  border-radius: 20px;
+}
+
+.remove-item-btn:hover {
+  background: #dc3545;
+  border-color: #dc3545;
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* ========== COUPON SECTION ========== */
+
+.coupon-section {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--luvee-primary);
+}
+
+.coupon-section h6 {
+  color: var(--luvee-dark);
+  font-weight: 600;
+}
+
+.coupon-section .input-group input {
+  border: 2px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+
+.coupon-section .input-group input:focus {
+  border-color: var(--luvee-primary);
+  box-shadow: none;
+}
+
+/* ========== CART TOTALS ========== */
+
+.cart-totals-section {
+  position: sticky;
+  top: 100px;
+}
+
+.cart-totals-card {
+  border: 2px solid #f8f9fa;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.cart-totals-card:hover {
+  border-color: var(--luvee-primary);
+  box-shadow: 0 8px 25px rgba(255, 107, 157, 0.2);
+}
+
+.cart-totals-card .card-header {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-bottom: 2px solid #e9ecef;
+}
+
+.cart-totals-card h5 {
+  color: var(--luvee-dark);
+  font-weight: 600;
+}
+
+.cart-totals-card h5 i {
+  color: var(--luvee-primary);
+}
+
+/* ========== CART TOTALS ROWS ========== */
+
+.cart-subtotal,
+.order-total,
+.shipping-section,
+.tax-total,
+.fee {
+  padding: 0.75rem 0;
+  font-size: 0.95rem;
+}
+
+.order-total {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  margin: 0 -1.5rem;
+  padding: 1rem 1.5rem;
+  border-top: 2px solid #e9ecef;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.text-primary-custom {
+  background: linear-gradient(
+    135deg,
+    var(--luvee-primary) 0%,
+    var(--luvee-secondary) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========== COUPON DISCOUNT ========== */
+
+.cart-discount {
+  border: 2px solid #28a745;
+  background: rgba(40, 167, 69, 0.1);
+  animation: slideInDown 0.5s ease;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== FREE SHIPPING PROGRESS ========== */
+
+.free-shipping-progress {
+  border: 2px solid #0dcaf0;
+  background: rgba(13, 202, 240, 0.1);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(13, 202, 240, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(13, 202, 240, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(13, 202, 240, 0);
+  }
+}
+
+.progress {
+  background: rgba(13, 202, 240, 0.2);
+  border-radius: 10px;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, #0dcaf0 0%, #0aa8cc 100%);
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+/* ========== CHECKOUT BUTTON ========== */
+
+.checkout-button {
+  background: linear-gradient(
+    135deg,
+    var(--luvee-primary) 0%,
+    var(--luvee-secondary) 100%
+  );
+  border: none;
+  border-radius: 25px;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(255, 107, 157, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.checkout-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.checkout-button:hover::before {
+  left: 100%;
+}
+
+.checkout-button:hover {
+  background: linear-gradient(135deg, #ff5a8a 0%, #ff7bb8 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+}
+
+.checkout-button:active {
+  transform: translateY(-1px);
+}
+
+/* ========== SECURITY INFO ========== */
+
+.security-info {
+  padding: 1rem 0;
+  border-top: 1px solid #e9ecef;
+  margin-top: 1rem;
+}
+
+.security-info i {
+  color: #28a745;
+}
+
+/* ========== SHIPPING CALCULATOR ========== */
+
+.shipping-calculator-form {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+}
+
+.shipping-calculator-form .form-control {
+  border: 2px solid #e9ecef;
+  transition: border-color 0.3s ease;
+}
+
+.shipping-calculator-form .form-control:focus {
+  border-color: var(--luvee-primary);
+  box-shadow: none;
+}
+
+/* ========== CART ACTIONS ========== */
+
+.cart-actions {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-top: 2px solid #e9ecef;
+}
+
+.cart-actions .btn {
+  border-radius: 20px;
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.cart-actions .btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--luvee-primary) 0%,
+    var(--luvee-secondary) 100%
+  );
+  border: none;
+  box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+}
+
+.cart-actions .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+}
+
+.cart-actions .btn-outline-primary {
+  border: 2px solid var(--luvee-primary);
+  color: var(--luvee-primary);
+}
+
+.cart-actions .btn-outline-primary:hover {
+  background: var(--luvee-primary);
+  border-color: var(--luvee-primary);
+  transform: translateY(-2px);
+}
+
+/* ========== RECOMMENDATIONS SECTION ========== */
+
+.cart-recommendations {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.cart-recommendations .section-header h4 {
+  color: var(--luvee-dark);
+  font-weight: 600;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+@media (max-width: 991.98px) {
+  .cart-title {
+    font-size: 1.8rem;
+  }
+
+  .cart-totals-section {
+    position: static;
+    margin-top: 2rem;
+  }
+
+  .cart-item-card .row {
+    text-align: center;
+  }
+
+  .cart-item-card .col-md-2,
+  .cart-item-card .col-md-3,
+  .cart-item-card .col-md-4 {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .cart-header {
+    padding: 1.5rem 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .cart-title {
+    font-size: 1.5rem;
+  }
+
+  .cart-subtitle {
+    font-size: 1rem;
+  }
+
+  .cart-items-section,
+  .cart-totals-card {
+    padding: 1rem;
+  }
+
+  .quantity-wrapper input[type="number"] {
+    max-width: 80px;
+    font-size: 0.9rem;
+  }
+
+  .checkout-button {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+  }
+
+  .cart-actions {
+    padding: 1rem;
+  }
+
+  .cart-actions .row {
+    text-align: center;
+  }
+
+  .cart-actions .col-md-6 {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .luvee-cart-page .container-fluid {
+    padding: 1rem;
+  }
+
+  .cart-header {
+    margin-bottom: 1rem;
+  }
+
+  .cart-item-card .card-body {
+    padding: 1rem;
+  }
+
+  .price-display {
+    font-size: 1.1rem;
+  }
+
+  .coupon-section {
+    padding: 1rem;
+  }
+
+  .cart-recommendations {
+    padding: 1rem;
+  }
+}
+
+/* ========== LOADING STATES ========== */
+
+.cart-loading {
+  opacity: 0.7;
+  pointer-events: none;
+  position: relative;
+}
+
+.cart-loading::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.cart-loading::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--luvee-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 1000;
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* ========== SUCCESS ANIMATIONS ========== */
+
+.cart-item-updated {
+  animation: itemUpdated 0.6s ease;
+}
+
+@keyframes itemUpdated {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+    background-color: rgba(40, 167, 69, 0.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.cart-item-removed {
+  animation: itemRemoved 0.5s ease forwards;
+}
+
+@keyframes itemRemoved {
+  0% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100%) scale(0.8);
+    height: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* ========== ACCESSIBILITY ========== */
+
+.cart-item-card:focus-within {
+  outline: 2px solid var(--luvee-primary);
+  outline-offset: 2px;
+}
+
+.remove-item-btn:focus,
+.checkout-button:focus,
+.quantity-wrapper input:focus {
+  outline: 2px solid var(--luvee-primary);
+  outline-offset: 2px;
+}
+
+/* ========== PRINT STYLES ========== */
+
+@media print {
+  .cart-header,
+  .cart-actions,
+  .remove-item-btn,
+  .cart-recommendations {
+    display: none !important;
+  }
+
+  .luvee-cart-page {
+    background: white !important;
+  }
+
+  .cart-item-card,
+  .cart-totals-card {
+    box-shadow: none !important;
+    border: 1px solid #ddd !important;
+  }
+}

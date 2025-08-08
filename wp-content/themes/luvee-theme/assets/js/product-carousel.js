@@ -47,7 +47,7 @@
                 columns: columns
             });
 
-            console.log(`✅ Carousel ${carouselId} initialized with ${columns} columns`);
+            
         },
 
         // Create carousel HTML structure
@@ -320,7 +320,6 @@
     // Initialize when document is ready
     $(document).ready(function() {
         ProductCarousel.init();
-        console.log('✅ Product Carousel system initialized');
     });
 
     // Re-initialize on window resize (throttled)

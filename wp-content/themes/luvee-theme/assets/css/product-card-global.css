@@ -228,22 +228,8 @@
   cursor: not-allowed;
 }
 
-/* Success animation */
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.btn-add-to-cart.success {
-  animation: pulse 0.6s ease-in-out;
-}
+/* Success animation desabilitada (evitar efeito de pulse no grid/loja) */
+/* Mantemos somente mudança de cor via classe .success */
 
 /* ========== PRODUCT CONTENT ========== */
 

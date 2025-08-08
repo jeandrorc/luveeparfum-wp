@@ -133,13 +133,31 @@ if ($display_mode === 'carousel') {
         </button>
       </div>
 
-      <!-- Add to Cart Button - Aparece no hover -->
+      <!-- Add to Cart Button - Aparece no hover (mesma estrutura de estados do botão principal) -->
       <div
         class="product-cart-overlay position-absolute w-100 h-100 d-flex align-items-center justify-content-center opacity-0">
-        <button type="button" class="btn btn-add-to-cart px-4 py-2 fw-semibold"
-          data-product-id="<?php echo esc_attr($product->get_id()); ?>">
-          <i class="fas fa-shopping-cart me-2"></i>
-          Adicionar ao Carrinho
+        <button type="button" class="btn btn-add-to-cart px-4 py-2 fw-semibold position-relative"
+          data-product-id="<?php echo esc_attr($product->get_id()); ?>"
+          data-product-name="<?php echo esc_attr($product->get_name()); ?>"
+          data-nonce="<?php echo wp_create_nonce('luvee_cart_nonce'); ?>"
+          aria-label="Adicionar <?php echo esc_attr($product->get_name()); ?> ao carrinho">
+
+          <span class="btn-text">
+            <i class="fas fa-shopping-cart me-2"></i>
+            Adicionar ao Carrinho
+          </span>
+
+          <span class="btn-loading d-none">
+            <div class="spinner-border spinner-border-sm me-1" role="status">
+              <span class="visually-hidden">Carregando...</span>
+            </div>
+            Adicionando...
+          </span>
+
+          <span class="btn-success-text d-none">
+            <i class="fas fa-check me-1"></i>
+            Adicionado!
+          </span>
         </button>
       </div>
     </div>

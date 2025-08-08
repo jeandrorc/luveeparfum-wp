@@ -52,9 +52,6 @@ add_action('after_setup_theme', 'luvee_theme_setup');
  */
 function luvee_enqueue_scripts()
 {
-  // Debug
-  error_log('🔧 Luvee: Enqueue scripts executado');
-
   // FORÇAR JQUERY NO FRONTEND
   wp_enqueue_script('jquery');
   // Google Fonts - Poppins
@@ -65,12 +62,12 @@ function luvee_enqueue_scripts()
     null
   );
 
-  // Font Awesome (mantido para compatibilidade com plugins)
+  // Font Awesome 5 (compatível com classes existentes 'fas', 'far')
   wp_enqueue_style(
     'font-awesome',
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css',
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css',
     array(),
-    '6.5.0'
+    '5.15.4'
   );
 
   // Heroicons - Sistema customizado implementado via JavaScript
@@ -100,6 +97,14 @@ function luvee_enqueue_scripts()
     wp_get_theme()->get('Version')
   );
 
+  // Footer Modern Styles (disponível em todas as páginas)
+  wp_enqueue_style(
+    'luvee-footer-modern',
+    get_template_directory_uri() . '/assets/css/footer-modern.css',
+    array('luvee-style'),
+    wp_get_theme()->get('Version')
+  );
+
   // Bootstrap 5 JavaScript
   wp_enqueue_script(
     'bootstrap-bundle',
@@ -122,51 +127,30 @@ function luvee_enqueue_scripts()
   $header_js_url = get_template_directory_uri() . '/assets/js/header-enhancements.js';
   $heroicons_js_url = get_template_directory_uri() . '/assets/js/heroicons-simple.js';
 
-  error_log('🔧 Luvee: Enfileirando ' . $header_js_url);
-  error_log('🔧 Luvee: Enfileirando ' . $heroicons_js_url);
+  // (logs removidos)
 
   // IMPORTANTE: Garantir que jQuery está carregado
   wp_enqueue_script('jquery');
 
-  wp_enqueue_script(
-    'luvee-test-simple',
-    get_template_directory_uri() . '/assets/js/test-simple.js',
-    array(),
-    time(),
-    true
-  );
-
-  wp_enqueue_script(
-    'luvee-jquery-test',
-    get_template_directory_uri() . '/assets/js/jquery-test.js',
-    array('jquery'),
-    time(),
-    true
-  );
+  // Removido scripts de teste não essenciais em produção
 
   wp_enqueue_script(
     'luvee-heroicons-simple',
     $heroicons_js_url,
     array('jquery'),
     wp_get_theme()->get('Version') . '.' . time(),
-    true
+    false
   );
+  // (debug inline removido)
 
   wp_enqueue_script(
     'luvee-header-enhancements',
     $header_js_url,
     array('jquery', 'luvee-heroicons-simple'),
     wp_get_theme()->get('Version') . '.' . time(),
-    true
+    false
   );
-
-  // Debug info SEMPRE ativo para diagnosticar
-  wp_add_inline_script('luvee-header-enhancements', '
-    console.log("🎯 Tema ativo: ' . get_option('stylesheet') . '");
-    console.log("📁 URL base: ' . get_template_directory_uri() . '");
-    console.log("⏰ Timestamp: ' . time() . '");
-    console.log("🔧 Script timestamp: ' . time() . '");
-  ');
+  // (debug inline removido)
 
   // Localização para JavaScript
   wp_localize_script('luvee-script', 'luvee_ajax', array(
@@ -461,16 +445,33 @@ add_action('pre_get_posts', 'luvee_shop_filters_query');
 /**
  * Cart AJAX Scripts - Global (todas as páginas)
  */
-function luvee_cart_scripts()
+function luvee_global_cart_scripts()
 {
-  // Cart AJAX JavaScript
+  // Garantir dependência (alguns ambientes não registram wc-cart-fragments cedo)
+  $cart_deps = array('jquery');
+  if (wp_script_is('wc-cart-fragments', 'registered')) {
+    $cart_deps[] = 'wc-cart-fragments';
+  } else {
+    // Registrar handle vazio para não bloquear
+    wp_register_script('wc-cart-fragments', '', array('jquery'), null, true);
+    $cart_deps[] = 'wc-cart-fragments';
+  }
+
+  // Cart AJAX JavaScript (carregar no head temporariamente para diagnosticar)
   wp_enqueue_script(
     'luvee-cart-ajax',
     get_template_directory_uri() . '/assets/js/cart-ajax.js',
-    array('jquery'),
-    wp_get_theme()->get('Version'),
-    true
+    $cart_deps,
+    wp_get_theme()->get('Version') . '.' . time(),
+    false
   );
+
+  // (debug inline removido)
+
+  // Garantir que os fragments do WooCommerce estejam disponíveis em todas as páginas
+  if (function_exists('WC')) {
+    wp_enqueue_script('wc-cart-fragments');
+  }
 
   // Cart AJAX Localization
   wp_localize_script('luvee-cart-ajax', 'luvee_cart_ajax', array(
@@ -509,8 +510,8 @@ function luvee_cart_scripts()
     'luvee-product-carousel',
     get_template_directory_uri() . '/assets/js/product-carousel.js',
     array('jquery'),
-    wp_get_theme()->get('Version'),
-    true
+    wp_get_theme()->get('Version') . '.' . time(),
+    false
   );
 
   // Product Grid Flexbox JavaScript
@@ -518,11 +519,11 @@ function luvee_cart_scripts()
     'luvee-product-grid-flexbox',
     get_template_directory_uri() . '/assets/js/product-grid-flexbox.js',
     array('jquery'),
-    wp_get_theme()->get('Version'),
-    true
+    wp_get_theme()->get('Version') . '.' . time(),
+    false
   );
 }
-add_action('wp_enqueue_scripts', 'luvee_cart_scripts');
+add_action('wp_enqueue_scripts', 'luvee_global_cart_scripts', 20);
 
 /**
  * Enqueue shop scripts and styles
@@ -534,9 +535,11 @@ function luvee_shop_scripts()
       'luvee-shop-filters',
       get_template_directory_uri() . '/assets/js/shop-filters.js',
       array('jquery', 'luvee-heroicons-simple', 'luvee-header-enhancements', 'luvee-cart-ajax'),
-      wp_get_theme()->get('Version'),
+      wp_get_theme()->get('Version') . '.' . time(),
       true
     );
+
+    // (debug inline removido)
 
     wp_localize_script('luvee-shop-filters', 'luvee_shop_ajax', array(
       'ajax_url' => admin_url('admin-ajax.php'),
@@ -574,18 +577,18 @@ function luvee_shop_scripts()
     wp_add_inline_script('luvee-shop-filters', '
       // Reforçar inicialização dos heroicons na página de produtos
       jQuery(document).ready(function($) {
-        console.log("🛍️ Página de produtos: inicializando heroicons...");
+        // (debug removido)
         
         // Aguardar um pouco para garantir que tudo carregou
         setTimeout(function() {
           if (typeof window.simpleHeroicons === "function") {
             window.simpleHeroicons();
-            console.log("✅ Heroicons reaplicados na página de produtos");
+             
           }
           
           if (typeof initHeroicons === "function") {
             initHeroicons();
-            console.log("✅ initHeroicons executado na página de produtos");
+             
           }
         }, 500);
         
@@ -600,6 +603,225 @@ function luvee_shop_scripts()
   }
 }
 add_action('wp_enqueue_scripts', 'luvee_shop_scripts');
+
+/**
+ * Enqueue cart page scripts and styles
+ */
+function luvee_cart_scripts()
+{
+  if (is_cart()) {
+    // Cart Page CSS
+    wp_enqueue_style(
+      'luvee-cart-page',
+      get_template_directory_uri() . '/assets/css/cart-page.css',
+      array('luvee-style'),
+      wp_get_theme()->get('Version')
+    );
+
+    // Cart Page JavaScript
+    wp_enqueue_script(
+      'luvee-cart-page',
+      get_template_directory_uri() . '/assets/js/cart-page.js',
+      array('jquery', 'luvee-cart-ajax'),
+      wp_get_theme()->get('Version') . '.' . time(),
+      true
+    );
+
+    // (debug inline removido)
+
+    // Localize script for AJAX
+    wp_localize_script('luvee-cart-page', 'luvee_cart_page_ajax', array(
+      'ajax_url' => admin_url('admin-ajax.php'),
+      'nonce' => wp_create_nonce('luvee_cart_page_nonce'),
+      'cart_url' => wc_get_cart_url(),
+      'shop_url' => get_permalink(get_option('woocommerce_shop_page_id')),
+      'currency_symbol' => get_woocommerce_currency_symbol(),
+      'free_shipping_amount' => 199
+    ));
+  }
+}
+add_action('wp_enqueue_scripts', 'luvee_cart_scripts');
+
+/**
+ * Enqueue checkout page scripts and styles
+ */
+function luvee_checkout_scripts()
+{
+  if (is_checkout() && !is_order_received_page()) {
+    // Checkout CSS
+    wp_enqueue_style(
+      'luvee-checkout-page',
+      get_template_directory_uri() . '/assets/css/checkout-page.css',
+      array('luvee-style'),
+      wp_get_theme()->get('Version')
+    );
+
+    // Checkout JS
+    wp_enqueue_script(
+      'luvee-checkout-page',
+      get_template_directory_uri() . '/assets/js/checkout-page.js',
+      array('jquery'),
+      wp_get_theme()->get('Version'),
+      true
+    );
+  }
+}
+add_action('wp_enqueue_scripts', 'luvee_checkout_scripts');
+
+/**
+ * Ensure WooCommerce core pages (Cart/Checkout/My Account) exist and are linked
+ * Also helps fix 404 issues on these endpoints by creating missing pages and flushing permalinks
+ */
+function luvee_ensure_woocommerce_pages()
+{
+  if (!function_exists('WC')) {
+    return;
+  }
+
+  // Avoid running on every request
+  if (get_transient('luvee_wc_pages_checked')) {
+    return;
+  }
+
+  $pages_to_check = array(
+    'woocommerce_cart_page_id' => array(
+      'title' => __('Carrinho', 'luvee-theme'),
+      'slug' => 'carrinho',
+      'shortcode' => '[woocommerce_cart]'
+    ),
+    'woocommerce_checkout_page_id' => array(
+      'title' => __('Finalizar compra', 'luvee-theme'),
+      'slug' => 'finalizar-compra',
+      'shortcode' => '[woocommerce_checkout]'
+    ),
+    'woocommerce_myaccount_page_id' => array(
+      'title' => __('Minha conta', 'luvee-theme'),
+      'slug' => 'minha-conta',
+      'shortcode' => '[woocommerce_my_account]'
+    ),
+  );
+
+  $created_any = false;
+
+  foreach ($pages_to_check as $option_name => $data) {
+    $page_id = get_option($option_name);
+
+    if (!$page_id || get_post_status($page_id) !== 'publish') {
+      // Try to find by slug
+      $existing = get_page_by_path($data['slug']);
+      if ($existing && $existing->post_status === 'publish') {
+        update_option($option_name, $existing->ID);
+        continue;
+      }
+
+      // Create page
+      $new_id = wp_insert_post(array(
+        'post_title' => $data['title'],
+        'post_name' => $data['slug'],
+        'post_status' => 'publish',
+        'post_type' => 'page',
+        'post_content' => $data['shortcode'],
+      ));
+
+      if (!is_wp_error($new_id)) {
+        update_option($option_name, $new_id);
+        $created_any = true;
+      }
+    }
+  }
+
+  if ($created_any) {
+    // Flush permalinks to avoid 404
+    flush_rewrite_rules(false);
+  }
+
+  // Re-check in 30 minutes
+  set_transient('luvee_wc_pages_checked', 1, 30 * MINUTE_IN_SECONDS);
+}
+add_action('admin_init', 'luvee_ensure_woocommerce_pages');
+add_action('after_switch_theme', 'luvee_ensure_woocommerce_pages');
+
+/**
+ * AJAX handler for updating single cart item
+ */
+function luvee_ajax_update_cart_item()
+{
+  // Aceitar nonce do carrinho (mini-cart) e da página de carrinho
+  $nonce = isset($_POST['nonce']) ? sanitize_text_field($_POST['nonce']) : '';
+  $nonce_ok = wp_verify_nonce($nonce, 'luvee_cart_page_nonce') || wp_verify_nonce($nonce, 'luvee_cart_nonce');
+  if (!$nonce_ok) {
+    wp_send_json_error(array('message' => 'Falha de segurança (nonce)'));
+    return;
+  }
+
+  // Aceitar tanto 'cart_item_key' (novo) quanto 'cart_key' (mini-cart legado)
+  $cart_item_key = isset($_POST['cart_item_key']) ? sanitize_text_field($_POST['cart_item_key']) : '';
+  if (!$cart_item_key && isset($_POST['cart_key'])) {
+    $cart_item_key = sanitize_text_field($_POST['cart_key']);
+  }
+
+  $quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 0;
+
+  if (!$cart_item_key) {
+    wp_send_json_error(array('message' => 'Chave do item inválida'));
+    return;
+  }
+
+  // Update cart item
+  $updated = WC()->cart->set_quantity($cart_item_key, $quantity);
+
+  if ($updated) {
+    WC()->cart->calculate_totals();
+
+    wp_send_json_success(array(
+      'message' => 'Item atualizado com sucesso',
+      'fragments' => apply_filters('woocommerce_add_to_cart_fragments', array()),
+      'cart_total' => WC()->cart->get_cart_total(),
+      'cart_count' => WC()->cart->get_cart_contents_count()
+    ));
+  } else {
+    wp_send_json_error(array('message' => 'Erro ao atualizar item'));
+  }
+}
+add_action('wp_ajax_luvee_update_cart_item', 'luvee_ajax_update_cart_item');
+add_action('wp_ajax_nopriv_luvee_update_cart_item', 'luvee_ajax_update_cart_item');
+
+/**
+ * AJAX handler for applying coupon
+ */
+function luvee_ajax_apply_coupon()
+{
+  check_ajax_referer('luvee_cart_page_nonce', 'nonce');
+
+  $coupon_code = sanitize_text_field($_POST['coupon_code']);
+
+  if (empty($coupon_code)) {
+    wp_send_json_error(array('message' => 'Código do cupom é obrigatório'));
+    return;
+  }
+
+  // Apply coupon
+  $result = WC()->cart->apply_coupon($coupon_code);
+
+  if ($result) {
+    WC()->cart->calculate_totals();
+
+    wp_send_json_success(array(
+      'message' => 'Cupom aplicado com sucesso',
+      'fragments' => apply_filters('woocommerce_add_to_cart_fragments', array()),
+      'cart_total' => WC()->cart->get_cart_total()
+    ));
+  } else {
+    // Get WooCommerce notices
+    $notices = wc_get_notices('error');
+    $message = !empty($notices) ? $notices[0]['notice'] : 'Cupom inválido';
+    wc_clear_notices();
+
+    wp_send_json_error(array('message' => $message));
+  }
+}
+add_action('wp_ajax_luvee_apply_coupon', 'luvee_ajax_apply_coupon');
+add_action('wp_ajax_nopriv_luvee_apply_coupon', 'luvee_ajax_apply_coupon');
 
 /**
  * AJAX handler for shop filters
@@ -735,33 +957,7 @@ function luvee_ajax_add_to_cart()
 add_action('wp_ajax_luvee_add_to_cart', 'luvee_ajax_add_to_cart');
 add_action('wp_ajax_nopriv_luvee_add_to_cart', 'luvee_ajax_add_to_cart');
 
-/**
- * Update cart item quantity via AJAX
- */
-function luvee_ajax_update_cart_item()
-{
-  check_ajax_referer('luvee_cart_nonce', 'nonce');
 
-  $cart_key = sanitize_text_field($_POST['cart_key']);
-  $quantity = intval($_POST['quantity']);
-
-  if (!$cart_key) {
-    wp_send_json_error(array('message' => 'Item não encontrado'));
-  }
-
-  $updated = WC()->cart->set_quantity($cart_key, $quantity);
-
-  if ($updated) {
-    wp_send_json_success(array(
-      'message' => 'Carrinho atualizado',
-      'cart_count' => WC()->cart->get_cart_contents_count(),
-      'cart_total' => luvee_format_price_clean(WC()->cart->get_cart_total()),
-      'fragments' => apply_filters('woocommerce_add_to_cart_fragments', array())
-    ));
-  } else {
-    wp_send_json_error(array('message' => 'Erro ao atualizar carrinho'));
-  }
-}
 add_action('wp_ajax_luvee_update_cart_item', 'luvee_ajax_update_cart_item');
 add_action('wp_ajax_nopriv_luvee_update_cart_item', 'luvee_ajax_update_cart_item');
 

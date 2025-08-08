@@ -365,53 +365,34 @@ window.testMobileMenu = function() {
     const overlay = document.getElementById('mobile-menu');
     const toggle = document.getElementById('mobile-menu-toggle');
     
-    console.log('🧪 Teste manual do mobile menu:', {
-        overlay: !!overlay,
-        toggle: !!toggle,
-        overlayClasses: overlay ? Array.from(overlay.classList) : 'não encontrado',
-        overlayStyle: overlay ? getComputedStyle(overlay).display : 'não encontrado'
-    });
+    
     
     if (overlay) {
-        console.log('🔄 Forçando abertura do menu...');
+        
         overlay.classList.add('show');
         overlay.style.display = 'flex';
         overlay.style.opacity = '1';
         overlay.style.visibility = 'visible';
         overlay.style.pointerEvents = 'auto';
         
-        console.log('✅ Menu forçado. Classes atuais:', Array.from(overlay.classList));
+        
     }
     
     return { overlay, toggle };
 };
 
 // === TESTE DE CARREGAMENTO ===
-console.log('🚀 Header enhancements carregado!');
-console.log('📍 Arquivo: header-enhancements.js');
-console.log('⏰ Timestamp:', new Date().toLocaleTimeString());
+// debug removido
 
 // Função de teste simples
-window.testJS = function() {
-    console.log('✅ JavaScript funcionando!');
-    return 'JavaScript carregado corretamente';
-};
+window.testJS = function() { return 'JavaScript carregado corretamente'; };
 
 // Log das funções disponíveis
-console.log('🛠️ Funções de debug disponíveis:');
-console.log('  - testHeroicons() - Debug completo');
-console.log('  - simpleHeroicons() - Aplicar emojis fallback');
-console.log('  - forceHeroicons() - Forçar reinicialização');
-console.log('  - addHeroicon(nome, svg) - Adicionar novo ícone');
+// debug removido
 
 // Debug imediato dos elementos
 setTimeout(() => {
-    const debugElements = document.querySelectorAll('[data-heroicon]');
-    console.log('🔍 Elementos com data-heroicon encontrados:', debugElements.length);
-    debugElements.forEach((el, index) => {
-        console.log(`  ${index + 1}. ${el.getAttribute('data-heroicon')} - Classes: ${el.className}`);
-        console.log(`     Parent: ${el.parentNode?.tagName}, HTML: ${el.outerHTML}`);
-    });
+    
 }, 500);
 
 // === SISTEMA HEROICONS CUSTOMIZADO ===
@@ -419,7 +400,6 @@ setTimeout(() => {
 
 // Versão simplificada para debug imediato
 window.simpleHeroicons = function() {
-    console.log('🔧 Aplicando versão simplificada dos Heroicons...');
     const elements = document.querySelectorAll('[data-heroicon]');
     
     const simpleIcons = {
@@ -435,7 +415,7 @@ window.simpleHeroicons = function() {
         const fallback = simpleIcons[iconName] || '●';
         el.innerHTML = fallback;
         el.style.fontSize = '16px';
-        console.log(`Aplicado fallback para ${iconName}: ${fallback}`);
+        
     });
     
     return elements.length;
@@ -456,12 +436,10 @@ const heroiconsSVG = {
 
 // Função para inicializar os ícones Heroicons
 function initHeroicons() {
-    console.log('🔄 Iniciando processamento de Heroicons...');
     const heroiconElements = document.querySelectorAll('[data-heroicon]');
-    console.log(`📊 Encontrados ${heroiconElements.length} elementos para processar`);
     
     if (heroiconElements.length === 0) {
-        console.warn('⚠️ Nenhum elemento [data-heroicon] encontrado no DOM');
+        
         return;
     }
     
@@ -469,7 +447,7 @@ function initHeroicons() {
         const iconName = element.getAttribute('data-heroicon');
         const svgContent = heroiconsSVG[iconName];
         
-        console.log(`  🔄 Processando ícone ${index + 1}: "${iconName}"`);
+        
         
         if (svgContent) {
             try {
@@ -477,8 +455,7 @@ function initHeroicons() {
                 const existingClasses = element.className;
                 const existingId = element.id;
                 
-                console.log(`    ✅ SVG encontrado para "${iconName}"`);
-                console.log(`    📝 Classes: ${existingClasses}`);
+                
                 
                 // Criar elemento SVG
                 const tempDiv = document.createElement('div');
@@ -486,7 +463,7 @@ function initHeroicons() {
                 const svgElement = tempDiv.firstElementChild;
                 
                 if (!svgElement) {
-                    console.error(`    ❌ Erro ao criar SVG para "${iconName}"`);
+                    
                     return;
                 }
                 
@@ -501,55 +478,39 @@ function initHeroicons() {
                 
                 // Substituir o elemento original
                 element.parentNode.replaceChild(svgElement, element);
-                console.log(`    ✅ Ícone "${iconName}" substituído com sucesso`);
+                
                 
             } catch (error) {
-                console.error(`    ❌ Erro ao processar "${iconName}":`, error);
+                
                 element.innerHTML = '❌'; // Indicar erro visualmente
             }
         } else {
-            console.warn(`    ⚠️ Ícone Heroicon não encontrado: "${iconName}"`);
-            console.log(`    📚 Ícones disponíveis:`, Object.keys(heroiconsSVG));
+            
             // Fallback: usar um ícone padrão ou manter o elemento original
             element.innerHTML = '⚪'; // Círculo como fallback visual
         }
     });
     
-    const processedCount = heroiconElements.length;
-    const finalSvgCount = document.querySelectorAll('svg[data-heroicon-processed]').length;
-    console.log(`✨ Processamento concluído: ${processedCount} elementos processados, ${finalSvgCount} SVGs criados`);
+    
     
     // Verificação final
     setTimeout(() => {
         const finalCheck = document.querySelectorAll('[data-heroicon]');
-        if (finalCheck.length > 0) {
-            console.warn('⚠️ Ainda existem elementos não processados:', finalCheck.length);
-            finalCheck.forEach(el => {
-                console.log(`   Elemento não processado: ${el.getAttribute('data-heroicon')}`);
-            });
-        }
+        
     }, 100);
 }
 
 // Inicializar quando a página carregar
-console.log('📍 Estado do documento:', document.readyState);
-
 if (document.readyState === 'loading') {
-    console.log('📚 Aguardando DOMContentLoaded...');
     document.addEventListener('DOMContentLoaded', () => {
-        console.log('📚 DOMContentLoaded disparado!');
         setTimeout(initHeroicons, 100);
     });
 } else {
-    console.log('📚 DOM já carregado, inicializando imediatamente...');
     setTimeout(initHeroicons, 100);
 }
 
 // Backup com window.onload
-window.addEventListener('load', () => {
-    console.log('🪟 Window load disparado!');
-    setTimeout(initHeroicons, 200);
-});
+window.addEventListener('load', () => { setTimeout(initHeroicons, 200); });
 
 // Reinicializar ícones após mudanças dinâmicas no DOM
 const heroiconsObserver = new MutationObserver((mutations) => {
@@ -582,20 +543,19 @@ heroiconsObserver.observe(document.body, {
 // === GARANTIR CARREGAMENTO DOS ÍCONES ===
 // Backup para garantir que os ícones sejam carregados
 setTimeout(() => {
-    console.log('🔄 Executando backup de inicialização...');
+    
     initHeroicons();
 }, 1000);
 
 // Backup adicional mais tardio
 setTimeout(() => {
-    console.log('🔄 Executando segundo backup de inicialização...');
+    
     initHeroicons();
 }, 3000);
 
 // === FALLBACK MANUAL PARA TESTE ===
 // Adicionar ícones manualmente se o sistema automático falhar
 window.forceHeroicons = function() {
-    console.log('🚨 Forçando inicialização manual dos Heroicons...');
     
     // Tentar várias vezes até funcionar
     let attempts = 0;
@@ -603,10 +563,9 @@ window.forceHeroicons = function() {
     
     const tryInit = () => {
         attempts++;
-        console.log(`Tentativa ${attempts}/${maxAttempts}`);
+        
         
         const elements = document.querySelectorAll('[data-heroicon]');
-        console.log(`Elementos encontrados: ${elements.length}`);
         
         if (elements.length > 0) {
             initHeroicons();
@@ -615,9 +574,7 @@ window.forceHeroicons = function() {
         
         if (attempts < maxAttempts) {
             setTimeout(tryInit, 1000);
-        } else {
-            console.error('❌ Falha ao encontrar elementos após todas as tentativas');
-        }
+        } else { }
         
         return false;
     };
@@ -631,19 +588,7 @@ window.testHeroicons = function() {
     const svgElements = document.querySelectorAll('svg.heroicon');
     const processedElements = document.querySelectorAll('[data-heroicon-processed]');
     
-    console.log('🧪 Teste Heroicons:', {
-        'elementos-data-heroicon': heroiconElements.length,
-        'elementos-svg': svgElements.length,
-        'elementos-processados': processedElements.length,
-        'ícones-disponíveis': Object.keys(heroiconsSVG),
-        'elementos-encontrados': Array.from(heroiconElements).map(el => el.getAttribute('data-heroicon')),
-        'elementos-processados-nomes': Array.from(processedElements).map(el => el.getAttribute('data-heroicon-processed'))
-    });
-    
-    if (heroiconElements.length > 0) {
-        console.log('🔄 Reinicializando ícones...');
-        initHeroicons();
-    }
+    if (heroiconElements.length > 0) { initHeroicons(); }
     
     return {
         dataElements: heroiconElements.length,
@@ -656,6 +601,5 @@ window.testHeroicons = function() {
 // === FUNÇÃO PARA ADICIONAR NOVOS ÍCONES DINAMICAMENTE ===
 window.addHeroicon = function(iconName, svgContent) {
     heroiconsSVG[iconName] = svgContent;
-    console.log(`➕ Ícone '${iconName}' adicionado à biblioteca Heroicons`);
     initHeroicons(); // Reinicializar para processar novos ícones
 };

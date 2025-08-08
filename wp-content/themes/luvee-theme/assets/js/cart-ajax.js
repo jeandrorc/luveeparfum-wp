@@ -368,8 +368,7 @@
                         $('.cart-total').text(response.data.total || 'R$ 0,00');
                         self.updateCartCount(response.data.count);
                         
-                        // Debug para verificar dados
-                        console.log('Cart data:', response.data);
+                        
                     } else {
                         $content.html('<div class="text-center py-4"><p>Erro ao carregar carrinho</p></div>');
                     }
@@ -453,13 +452,9 @@
     };
 
     // Initialize when document is ready
-    $(document).ready(function() {
-        // Check if cart AJAX is configured
+            $(document).ready(function() {
         if (typeof luvee_cart_ajax !== 'undefined') {
             LuveeCart.init();
-            console.log('✅ Luvee Cart AJAX initialized');
-        } else {
-            console.warn('⚠️ Luvee Cart AJAX not configured');
         }
     });
 

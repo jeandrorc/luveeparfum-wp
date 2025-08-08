@@ -81,7 +81,7 @@ if ($product_type === 'best_sellers' && empty($products)) {
   $products = wc_get_products($fallback_args);
 
   // Log do fallback
-  error_log('[Luvee Product Section] Best sellers fallback to recent products - no sales data found');
+  
 }
 ?>
 

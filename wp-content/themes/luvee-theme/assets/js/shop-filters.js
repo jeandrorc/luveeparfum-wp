@@ -5,7 +5,7 @@
 
 (function($) {
     'use strict';
-
+    alert('shop-filters.js');
     const ShopFilters = {
         
         // Configuration
@@ -82,17 +82,17 @@
                 self.toggleWishlist(productId, $(this));
             });
 
-            // Adicionar ao carrinho - delegado para o sistema global
-            $(document).on('click', '.btn-add-to-cart', function(e) {
-                e.preventDefault();
-                // O sistema global LuveeCart irá lidar com isto
+            // Adicionar ao carrinho - NÃO duplicar o handler global (cart-ajax.js já trata)
+            // Mantemos apenas um fallback explícito caso o global não esteja presente
+            $(document).off('click.shopFiltersAddToCart', '.btn-add-to-cart')
+                         .on('click.shopFiltersAddToCart', '.btn-add-to-cart', function(e) {
                 if (typeof window.LuveeCart !== 'undefined') {
-                    window.LuveeCart.addToCart($(this));
-                } else {
-                    // Fallback para compatibilidade
-                    const productId = $(this).data('product-id');
-                    self.addToCart(productId, $(this));
+                    // Deixa o handler global cuidar (não impedir default aqui)
+                    return;
                 }
+                e.preventDefault();
+                const productId = $(this).data('product-id');
+                self.addToCart(productId, $(this));
             });
         },
 

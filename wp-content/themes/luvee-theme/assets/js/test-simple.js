@@ -1,8 +1,8 @@
 // === TESTE SIMPLES ===
-console.log('🧪 test-simple.js carregado com sucesso!');
+// debug removido
 
 window.testSimple = function() {
-    console.log('✅ Função de teste funcionando!');
+    
     return 'JavaScript carregando corretamente';
 };
 
@@ -30,7 +30,7 @@ function applyTestEmojis() {
         }
     });
     
-    console.log(`🎯 ${count} ícones de teste aplicados`);
+    
     return count;
 }
 
@@ -43,4 +43,4 @@ if (document.readyState === 'loading') {
 
 setTimeout(applyTestEmojis, 500);
 
-console.log('🛠️ Função disponível: testSimple()');
+// debug removido

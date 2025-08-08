@@ -14,7 +14,7 @@
             this.handleResponsiveResize();
             this.equalizeCardHeights();
             
-            console.log('✅ Product Grid Flexbox initialized');
+            
         },
 
         // Setup flexbox grids
@@ -32,7 +32,7 @@
                 // Setup grid items
                 ProductGridFlexbox.setupGridItems($grid);
                 
-                console.log(`🎛️ Flexbox grid ${gridId} setup: ${columns}×${rows}`);
+                
             });
         },
 
@@ -172,7 +172,7 @@
         refresh: function() {
             this.setupFlexboxGrids();
             this.equalizeCardHeights();
-            console.log('🔄 Product Grid Flexbox refreshed');
+            
         }
     };
 
@@ -192,15 +192,6 @@
     window.ProductGridFlexbox = ProductGridFlexbox;
 
     // Debug helpers (only in development)
-    if (typeof console !== 'undefined' && console.log) {
-        window.debugFlexboxGrid = function(gridId) {
-            const $grid = gridId ? $('#' + gridId) : $('.products-grid-flexbox').first();
-            if ($grid.length) {
-                const info = ProductGridFlexbox.getGridInfo($grid);
-                console.table(info);
-                ProductGridFlexbox.toggleDebugMode($grid);
-            }
-        };
-    }
+    // Debug helper removido em produção
 
 })(jQuery);

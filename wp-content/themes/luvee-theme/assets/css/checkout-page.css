@@ -1,0 +1,130 @@
+/**
+ * Checkout Page - Luvee Perfumaria
+ * Estilos modernos para a página de checkout
+ */
+
+.luvee-checkout-page {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  min-height: 100vh;
+}
+
+.checkout-header {
+  background: linear-gradient(
+    135deg,
+    var(--luvee-primary) 0%,
+    var(--luvee-secondary) 100%
+  );
+  color: white;
+  padding: 2rem 0;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(255, 107, 157, 0.3);
+}
+
+.checkout-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.checkout-title i {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem;
+  border-radius: 50%;
+}
+
+.checkout-subtitle {
+  font-size: 1.05rem;
+  opacity: 0.9;
+}
+
+.section-title {
+  color: var(--luvee-dark);
+  font-weight: 600;
+}
+
+/* Cards */
+.checkout-customer .card-body,
+.checkout-review .card-body {
+  padding: 1.5rem !important;
+}
+
+.checkout-review .card-header {
+  background: #f8f9fa;
+  border-bottom: 2px solid #e9ecef !important;
+}
+
+/* Coupon */
+.checkout-coupon .woocommerce-form-coupon {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--luvee-primary);
+}
+
+.checkout-coupon .form-row input.input-text {
+  border: 2px solid #e9ecef;
+}
+
+.checkout-coupon .form-row input.input-text:focus {
+  border-color: var(--luvee-primary);
+  box-shadow: none;
+}
+
+/* Payment section */
+#order_review .shop_table {
+  width: 100%;
+}
+
+#order_review .order-total {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 1rem !important;
+  border-top: 2px solid #e9ecef;
+  border-bottom: 2px solid #e9ecef;
+}
+
+/* Place order button */
+#place_order,
+.woocommerce-checkout #payment #place_order {
+  background: linear-gradient(
+    135deg,
+    var(--luvee-primary) 0%,
+    var(--luvee-secondary) 100%
+  );
+  border: none;
+  border-radius: 25px;
+  padding: 0.9rem 1.5rem;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(255, 107, 157, 0.3);
+  transition: all 0.3s ease;
+}
+
+#place_order:hover,
+.woocommerce-checkout #payment #place_order:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+}
+
+/* Trust badges */
+.trust-badges .badge-item i {
+  font-size: 1rem;
+}
+
+.text-primary-custom {
+  background: linear-gradient(
+    135deg,
+    var(--luvee-primary) 0%,
+    var(--luvee-secondary) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Responsive */
+@media (max-width: 767.98px) {
+  .checkout-title {
+    font-size: 1.6rem;
+  }
+  .checkout-header {
+    padding: 1.5rem 1rem;
+  }
+}

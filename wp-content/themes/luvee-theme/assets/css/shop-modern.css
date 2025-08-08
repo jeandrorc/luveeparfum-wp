@@ -747,23 +747,6 @@ body.archive {
   }
 }
 
-/* === PULSE ANIMATION === */
-.btn-primary:not(:hover) {
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.2);
-  }
-  50% {
-    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.35);
-  }
-  100% {
-    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.2);
-  }
-}
-
 /* === LOADING SHIMMER === */
 .loading-shimmer {
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);

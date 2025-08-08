@@ -1,0 +1,369 @@
+/**
+ * Footer Modern - Luvee Perfumaria
+ * Estilos modernos e profissionais para o footer
+ */
+
+/* ========== FOOTER BASE ========== */
+
+.footer-modern {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  color: #ecf0f1;
+  font-family: inherit;
+}
+
+.bg-darker {
+  background: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%) !important;
+}
+
+/* ========== TYPOGRAPHY ========== */
+
+.footer-modern .brand-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--luvee-primary) 0%,
+    var(--luvee-secondary) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.footer-modern .text-light-custom {
+  color: #bdc3c7;
+  line-height: 1.6;
+}
+
+.footer-modern .text-primary-custom {
+  color: var(--luvee-primary) !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.85rem;
+}
+
+.footer-modern .lh-relaxed {
+  line-height: 1.7;
+}
+
+/* ========== CONTACT INFO ========== */
+
+.footer-modern .contact-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(
+    135deg,
+    var(--luvee-primary) 0%,
+    var(--luvee-secondary) 100%
+  );
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(255, 107, 157, 0.2);
+  transition: all 0.3s ease;
+}
+
+.footer-modern .contact-icon i {
+  color: white;
+  font-size: 0.9rem;
+}
+
+.footer-modern .contact-item:hover .contact-icon {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 107, 157, 0.3);
+}
+
+.footer-modern .contact-item a {
+  transition: color 0.3s ease;
+}
+
+.footer-modern .contact-item a:hover {
+  color: var(--luvee-primary) !important;
+}
+
+/* ========== FOOTER LINKS ========== */
+
+.footer-modern .footer-link {
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  position: relative;
+  padding-left: 0;
+}
+
+.footer-modern .footer-link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(
+    135deg,
+    var(--luvee-primary) 0%,
+    var(--luvee-secondary) 100%
+  );
+  transition: width 0.3s ease;
+}
+
+.footer-modern .footer-link:hover {
+  color: var(--luvee-primary) !important;
+  transform: translateX(5px);
+}
+
+.footer-modern .footer-link:hover::before {
+  width: 100%;
+}
+
+/* ========== NEWSLETTER ========== */
+
+.footer-modern .newsletter-form .form-control {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ecf0f1;
+  border-radius: 6px 0 0 6px;
+  transition: all 0.3s ease;
+}
+
+.footer-modern .newsletter-form .form-control::placeholder {
+  color: #bdc3c7;
+}
+
+.footer-modern .newsletter-form .form-control:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--luvee-primary);
+  box-shadow: 0 0 0 0.2rem rgba(255, 107, 157, 0.25);
+  color: #ecf0f1;
+}
+
+.footer-modern .btn-primary-custom {
+  background: linear-gradient(
+    135deg,
+    var(--luvee-primary) 0%,
+    var(--luvee-secondary) 100%
+  );
+  border: none;
+  border-radius: 0 6px 6px 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
+}
+
+.footer-modern .btn-primary-custom:hover {
+  background: linear-gradient(135deg, #ff5a8a 0%, #ff7bb8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 107, 157, 0.4);
+}
+
+/* ========== SOCIAL LINKS ========== */
+
+.footer-modern .social-link {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #bdc3c7;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.footer-modern .social-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.footer-modern .social-link[data-color="#E4405F"]:hover {
+  background: #e4405f;
+  border-color: #e4405f;
+}
+
+.footer-modern .social-link[data-color="#1877F2"]:hover {
+  background: #1877f2;
+  border-color: #1877f2;
+}
+
+.footer-modern .social-link[data-color="#25D366"]:hover {
+  background: #25d366;
+  border-color: #25d366;
+}
+
+.footer-modern .social-link[data-color="#FF0000"]:hover {
+  background: #ff0000;
+  border-color: #ff0000;
+}
+
+/* ========== PAYMENT METHODS ========== */
+
+.footer-modern .payment-badge {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #bdc3c7;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.footer-modern .payment-badge:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* ========== DIVIDERS ========== */
+
+.footer-modern .border-secondary {
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.footer-modern .border-top {
+  border-top-width: 1px !important;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+@media (max-width: 991.98px) {
+  .footer-modern .brand-gradient {
+    font-size: 1.3rem;
+  }
+
+  .footer-modern .footer-links {
+    margin-bottom: 2rem;
+  }
+
+  .footer-modern .contact-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .footer-modern .contact-icon i {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .footer-modern .social-link {
+    width: 36px;
+    height: 36px;
+  }
+
+  .footer-modern .payment-badges {
+    justify-content: center;
+  }
+
+  .footer-modern .newsletter-form .input-group {
+    max-width: 280px;
+  }
+
+  .footer-modern .brand-gradient {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .footer-modern .footer-brand {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .footer-modern .footer-links {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-modern .contact-info {
+    justify-content: center;
+  }
+
+  .footer-modern .social-links {
+    justify-content: center;
+  }
+
+  .footer-modern .payment-methods {
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+/* ========== ANIMATIONS ========== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.footer-modern .footer-brand,
+.footer-modern .footer-links,
+.footer-modern .footer-newsletter {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.footer-modern .footer-links {
+  animation-delay: 0.1s;
+}
+
+.footer-modern .footer-newsletter {
+  animation-delay: 0.2s;
+}
+
+/* ========== ACCESSIBILITY ========== */
+
+.footer-modern a:focus {
+  outline: 2px solid var(--luvee-primary);
+  outline-offset: 2px;
+}
+
+.footer-modern .social-link:focus {
+  outline: 2px solid var(--luvee-primary);
+  outline-offset: 2px;
+}
+
+.footer-modern .btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 107, 157, 0.5);
+}
+
+/* ========== DARK MODE COMPATIBILITY ========== */
+
+@media (prefers-color-scheme: dark) {
+  .footer-modern {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+  }
+
+  .footer-modern .bg-darker {
+    background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%) !important;
+  }
+}
+
+/* ========== PRINT STYLES ========== */
+
+@media print {
+  .footer-modern {
+    background: white !important;
+    color: black !important;
+  }
+
+  .footer-modern .social-links,
+  .footer-modern .newsletter-form {
+    display: none !important;
+  }
+}
