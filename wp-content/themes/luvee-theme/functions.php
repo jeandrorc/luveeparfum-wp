@@ -778,6 +778,7 @@ function luvee_bootstrap_woocommerce_pages_front() {
         // Garantir shortcode no conteúdo
         $content = get_post_field('post_content', $page_id);
         if (strpos($content, $data['shortcode']) === false) {
+          // Se página está vazia ou sem shortcode, grava o shortcode corretor
           wp_update_post(array('ID' => $page_id, 'post_content' => $data['shortcode']));
           $updated = true;
         }
@@ -797,6 +798,11 @@ function luvee_bootstrap_woocommerce_pages_front() {
       if ($candidate) {
         if ($candidate->post_status !== 'publish') {
           wp_update_post(array('ID' => $candidate->ID, 'post_status' => 'publish'));
+        }
+        // Garantir shortcode no candidato
+        $content = get_post_field('post_content', $candidate->ID);
+        if (strpos($content, $data['shortcode']) === false) {
+          wp_update_post(array('ID' => $candidate->ID, 'post_content' => $data['shortcode']));
         }
         update_option($option_name, $candidate->ID);
       } else {
