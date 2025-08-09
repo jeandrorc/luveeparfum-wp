@@ -742,6 +742,116 @@ add_action('admin_init', 'luvee_ensure_woocommerce_pages');
 add_action('after_switch_theme', 'luvee_ensure_woocommerce_pages');
 
 /**
+ * Frontend bootstrap: garantir páginas core do WooCommerce e permalinks
+ * Executa no frontend também, para casos em que o admin ainda não visitou o painel.
+ */
+function luvee_bootstrap_woocommerce_pages_front() {
+  if (is_admin()) {
+    return;
+  }
+  if (!function_exists('WC')) {
+    return;
+  }
+
+  // Evitar rodar em toda request
+  if (get_transient('luvee_wc_pages_checked_front')) {
+    return;
+  }
+
+  $map = array(
+    'woocommerce_cart_page_id' => array('title' => __('Carrinho', 'luvee-theme'), 'slug' => 'carrinho', 'shortcode' => '[woocommerce_cart]'),
+    'woocommerce_checkout_page_id' => array('title' => __('Finalizar compra', 'luvee-theme'), 'slug' => 'finalizar-compra', 'shortcode' => '[woocommerce_checkout]'),
+    'woocommerce_myaccount_page_id' => array('title' => __('Minha conta', 'luvee-theme'), 'slug' => 'minha-conta', 'shortcode' => '[woocommerce_my_account]'),
+  );
+
+  $updated = false;
+
+  foreach ($map as $option_name => $data) {
+    $page_id = get_option($option_name);
+    $need_create = false;
+
+    if ($page_id) {
+      $status = get_post_status($page_id);
+      if ($status !== 'publish') {
+        $need_create = true;
+      } else {
+        // Garantir shortcode no conteúdo
+        $content = get_post_field('post_content', $page_id);
+        if (strpos($content, $data['shortcode']) === false) {
+          wp_update_post(array('ID' => $page_id, 'post_content' => $data['shortcode']));
+          $updated = true;
+        }
+      }
+    } else {
+      $need_create = true;
+    }
+
+    if ($need_create) {
+      // Tentar encontrar por slug em qualquer idioma
+      $candidate = get_page_by_path($data['slug']);
+      if (!$candidate) {
+        $fallback = get_page_by_path(sanitize_title($data['title']));
+        $candidate = $fallback ?: $candidate;
+      }
+
+      if ($candidate) {
+        if ($candidate->post_status !== 'publish') {
+          wp_update_post(array('ID' => $candidate->ID, 'post_status' => 'publish'));
+        }
+        update_option($option_name, $candidate->ID);
+      } else {
+        $new_id = wp_insert_post(array(
+          'post_title' => $data['title'],
+          'post_name' => $data['slug'],
+          'post_status' => 'publish',
+          'post_type' => 'page',
+          'post_content' => $data['shortcode'],
+        ));
+        if (!is_wp_error($new_id)) {
+          update_option($option_name, $new_id);
+        }
+      }
+      $updated = true;
+    }
+  }
+
+  if ($updated && !get_transient('luvee_wc_flush_once')) {
+    flush_rewrite_rules(false);
+    set_transient('luvee_wc_flush_once', 1, HOUR_IN_SECONDS);
+  }
+
+  // Marcar como checado por 20 min
+  set_transient('luvee_wc_pages_checked_front', 1, 20 * MINUTE_IN_SECONDS);
+}
+add_action('init', 'luvee_bootstrap_woocommerce_pages_front', 20);
+
+/**
+ * Redirecionar URLs comuns de carrinho/checkout se caírem em 404
+ */
+function luvee_wc_endpoint_redirects() {
+  if (!function_exists('WC')) return;
+  if (!is_404()) return;
+
+  $request_uri = trim($_SERVER['REQUEST_URI'] ?? '', '/');
+  $needs_redirect = false;
+  $target = '';
+
+  // Mapear possíveis caminhos
+  if (preg_match('~/(carrinho|cart)(/)?$~', '/' . $request_uri)) {
+    $needs_redirect = true;
+    $target = wc_get_cart_url();
+  } elseif (preg_match('~/(finalizar-compra|checkout)(/)?$~', '/' . $request_uri)) {
+    $needs_redirect = true;
+    $target = wc_get_checkout_url();
+  }
+
+  if ($needs_redirect && $target) {
+    wp_safe_redirect($target, 301);
+    exit;
+  }
+}
+add_action('template_redirect', 'luvee_wc_endpoint_redirects', 0);
+/**
  * AJAX handler for updating single cart item
  */
 function luvee_ajax_update_cart_item()
