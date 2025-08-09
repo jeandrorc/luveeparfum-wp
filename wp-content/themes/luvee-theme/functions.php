@@ -753,16 +753,24 @@ function luvee_bootstrap_woocommerce_pages_front() {
     return;
   }
 
-  // Evitar rodar em toda request
-  if (get_transient('luvee_wc_pages_checked_front')) {
-    return;
-  }
-
   $map = array(
     'woocommerce_cart_page_id' => array('title' => __('Carrinho', 'luvee-theme'), 'slug' => 'carrinho', 'shortcode' => '[woocommerce_cart]'),
     'woocommerce_checkout_page_id' => array('title' => __('Finalizar compra', 'luvee-theme'), 'slug' => 'finalizar-compra', 'shortcode' => '[woocommerce_checkout]'),
     'woocommerce_myaccount_page_id' => array('title' => __('Minha conta', 'luvee-theme'), 'slug' => 'minha-conta', 'shortcode' => '[woocommerce_my_account]'),
   );
+
+  // Checagem rápida: se tudo existir e tiver shortcode, podemos sair cedo com transient
+  $must_fix = false;
+  foreach ($map as $option_name => $data) {
+    $pid = get_option($option_name);
+    if (!$pid || get_post_status($pid) !== 'publish') { $must_fix = true; break; }
+    $content = get_post_field('post_content', $pid);
+    if (strpos((string) $content, $data['shortcode']) === false) { $must_fix = true; break; }
+  }
+
+  if (!$must_fix && get_transient('luvee_wc_pages_checked_front')) {
+    return;
+  }
 
   $updated = false;
 
