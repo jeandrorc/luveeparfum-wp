@@ -846,7 +846,22 @@ function luvee_wc_endpoint_redirects() {
   }
 
   if ($needs_redirect && $target) {
-    wp_safe_redirect($target, 301);
+    // Evitar loops: não redirecionar se o destino for o mesmo path atual
+    $current_path = rtrim(parse_url(home_url('/' . $request_uri), PHP_URL_PATH), '/');
+    $target_path = rtrim(parse_url($target, PHP_URL_PATH), '/');
+
+    if ($current_path === $target_path) {
+      return; // mesma URL, não redireciona
+    }
+
+    // Evitar redirecionar repetidamente: se um parâmetro de bypass estiver presente, não redireciona
+    if (isset($_GET['wc_redirect']) && $_GET['wc_redirect'] == '1') {
+      return;
+    }
+
+    // Acrescentar um parâmetro para prevenir redirecionamentos repetidos acidentais
+    $safe_target = add_query_arg('wc_redirect', '1', $target);
+    wp_safe_redirect($safe_target, 301);
     exit;
   }
 }
