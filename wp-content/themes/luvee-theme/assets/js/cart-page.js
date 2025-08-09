@@ -471,18 +471,26 @@
             };
 
             const $notification = $(`
-                <div class="cart-notification alert alert-${type} alert-dismissible fade show position-fixed" 
-                     style="top: 20px; right: 20px; z-index: 9999; max-width: 400px;">
+                <div class="cart-notification alert alert-${type} alert-dismissible position-fixed" 
+                     style="top: 20px; right: 20px; z-index: 9999; max-width: 400px; opacity:0; transition: opacity .2s ease;">
                     <i class="${icons[type]} me-2"></i>
                     ${message}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <button type="button" class="btn-close" aria-label="Fechar"></button>
                 </div>
             `);
 
+            $notification.on('click', '.btn-close', function() {
+                const $alert = $(this).closest('.cart-notification');
+                $alert.css('opacity', '0');
+                setTimeout(() => $alert.remove(), 200);
+            });
+
             $('body').append($notification);
+            requestAnimationFrame(() => $notification.css('opacity', '1'));
 
             setTimeout(() => {
-                $notification.alert('close');
+                $notification.css('opacity', '0');
+                setTimeout(() => $notification.remove(), 200);
             }, 5000);
         },
 

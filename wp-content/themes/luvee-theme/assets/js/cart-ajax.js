@@ -425,28 +425,38 @@
             return cleaned || 'R$ 0,00';
         },
 
-        // Show notification
+        // Show notification (sem dependência de jQuery plugin do Bootstrap)
         showNotification: function(message, type = 'success') {
-            // Remove existing notifications
+            // Remove existentes para evitar empilhamento
             $('.luvee-notification').remove();
-            
+
             const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
             const icon = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
-            
+
             const notification = $(`
-                <div class="luvee-notification alert ${alertClass} alert-dismissible fade show position-fixed" 
-                     style="top: 20px; right: 20px; z-index: 9999; min-width: 300px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                <div class="luvee-notification alert ${alertClass} alert-dismissible position-fixed"
+                     style="top: 20px; right: 20px; z-index: 9999; min-width: 300px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); opacity: 0; transition: opacity .2s ease;">
                     <i class="${icon} me-2"></i>
                     ${message}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <button type="button" class="btn-close" aria-label="Fechar"></button>
                 </div>
             `);
-            
+
+            // Fechar manualmente ao clicar no X
+            notification.on('click', '.btn-close', function() {
+                const $alert = $(this).closest('.luvee-notification');
+                $alert.css('opacity', '0');
+                setTimeout(() => $alert.remove(), 200);
+            });
+
             $('body').append(notification);
-            
-            // Auto remove
+            // Fade-in
+            requestAnimationFrame(() => notification.css('opacity', '1'));
+
+            // Auto remove após timeout
             setTimeout(() => {
-                notification.alert('close');
+                notification.css('opacity', '0');
+                setTimeout(() => notification.remove(), 200);
             }, this.config.notificationDuration);
         }
     };
